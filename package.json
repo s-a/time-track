@@ -4,7 +4,7 @@
   "description": "0.0.1",
   "main": "lib/cli.js",
   "bin": {
-    "tt": "./cli.js"
+    "tt": "lib/cli.js"
   },
   "dependencies": {
     "moment": "^2.11.2",
