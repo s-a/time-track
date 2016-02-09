@@ -1,6 +1,6 @@
 {
   "name": "time-track",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "0.0.1",
   "main": "lib/cli.js",
   "bin": {
