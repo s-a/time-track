@@ -1,6 +1,6 @@
 {
   "name": "time-track",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "0.0.1",
   "main": "lib/cli.js",
   "bin": {
@@ -14,7 +14,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "debug": "iron-node lib/cli.js"
+    "debug": "iron-node lib/cli.js",
+    "bump": "npm version patch && git push && git push --tags && npm publish"
   },
   "repository": {
     "type": "git",
