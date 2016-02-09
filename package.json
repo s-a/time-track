@@ -1,0 +1,33 @@
+{
+  "name": "time-track",
+  "version": "1.0.0",
+  "description": "0.0.1",
+  "main": "lib/cli.js",
+  "bin": {
+    "tt": "./cli.js"
+  },
+  "dependencies": {
+    "moment": "^2.11.2",
+    "colors": "^1.1.2",
+    "commander": "^2.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "iron-node lib/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/s-a/time-track.git"
+  },
+  "keywords": [
+    "time-tracker",
+    "timer"
+  ],
+  "author": "Stephan Ahlf <stephan.ahlf@gmail.com> (https://github.com/s-a)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/s-a/time-track/issues"
+  },
+  "homepage": "https://github.com/s-a/time-track#readme"
+}
