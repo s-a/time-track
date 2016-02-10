@@ -6,3 +6,27 @@
 [![NPM Downloads](https://img.shields.io/npm/dm/time-track.svg)](https://www.npmjs.org/package/time-track)
 [![Massachusetts Institute of Technology (MIT)](https://s-a.github.io/license/img/mit.svg)](/LICENSE.md#mit)
 [![Donate](http://s-a.github.io/donate/donate.svg)](http://s-a.github.io/donate/)
+
+
+```npm install time-track -g```
+
+```shell
+  Usage: tt [options]
+
+  Options:
+
+    -h, --help                        output usage information
+    -V, --version                     output the version number
+    -c, --csv [date]                  report as csv for the current month or for a given date MM.YYYY
+    -v, --validate [date]             check the tracked time today or by a given date DD.MM.YYYY
+    -l, --list                        list available projects
+    -s, --switch [project]            create or switch to a given project name
+    -S, --availableseconds [seconds]  set the available time for the current project in seconds
+    -M, --availableminutes [minutes]  set the available time for the current project in minutes
+    -H, --availablehours [hours]      set the available time for the current project in hours
+    -D, --availabledays [days]        set the available time for the current project in days
+    -o, --open                        open the app data folder
+    -O, --opensystem                  open the system data folder
+    -e, --edit                        open current data storage json file in your editor
+    -E, --editsystem                  open system data storage json file in your editor
+```
