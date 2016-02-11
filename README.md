@@ -1,6 +1,6 @@
 [![NPM Version](http://img.shields.io/npm/v/time-track.svg)](https://www.npmjs.org/package/time-track)
 [![Build Status](https://travis-ci.org/s-a/time-track.svg)](https://travis-ci.org/s-a/time-track)
-[![Coverage Status](https://coveralls.io/repos/s-a/time-track/badge.svg)](https://coveralls.io/r/s-a/time-track.js) 
+[![Coverage Status](https://coveralls.io/repos/github/s-a/time-track/badge.svg?branch=master)](https://coveralls.io/github/s-a/time-track?branch=master)
 [![Codacy Badge](https://www.codacy.com/project/badge/9abe33d152db40bfa5833f2388b32646)](https://www.codacy.com/app/stephanahlf/time-track)
 [![Dependency Status](https://david-dm.org/s-a/time-track.svg)](https://david-dm.org/s-a/time-track)
 [![devDependency Status](https://david-dm.org/s-a/time-track/dev-status.svg)](https://david-dm.org/s-a/time-track#info=devDependencies)
