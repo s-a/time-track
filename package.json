@@ -9,6 +9,7 @@
   "dependencies": {
     "colors": "^1.1.2",
     "commander": "^2.9.0",
+    "coveralls": "^2.11.6",
     "fs-extra": "^0.26.5",
     "moment": "^2.11.2",
     "open": "0.0.5",
