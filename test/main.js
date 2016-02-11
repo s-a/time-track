@@ -3,7 +3,7 @@
 var should = require("should");
 /* jshint ignore:end */
 var projectName = "mocha-test";
-
+var tk = require('timekeeper');
 
 var Tracker;
 try {
@@ -123,6 +123,14 @@ describe("usage", function(){
 		}).should.throw("Please pass a value");
 	});
 
+
+	it("should throw exception when an invalid value was passed to --availabledays", function(){
+		(function() {
+			tracker.program = {testMode:true, availabledays:"&/("};
+			tracker.setAvailableWorkTime();
+		}).should.throw("Please pass a value");
+	});
+
 	it("should save when value was passed to --availableseconds", function(){
 		tracker = new Tracker({keepConfig:true, testMode:true, availableseconds:"1"});
 		tracker.setAvailableWorkTime();
@@ -149,8 +157,56 @@ describe("usage", function(){
 
 	it("should list projects --list", function(){
 		tracker = new Tracker({keepConfig:true, testMode:true, list:true});
+		tracker.listProjects();
 		tracker.system.configuration.projects.length.should.equal(1);
 		tracker.system.configuration.projects[0].should.equal(projectName);
+	});
+
+
+	var time = new Date(); 
+	tk.freeze(time);
+
+	it("should toggle state ON", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true});
+		tracker.toggle();
+		tracker.config[tracker.todayDateString].length.should.equal(1);
+	});
+
+	it("should toggle state OFF", function(){
+		time.setSeconds(time.getSeconds() + 30);
+		tk.travel(time); // Travel to that date.
+		tracker = new Tracker({keepConfig:true, testMode:true});
+		tracker.toggle();
+		tracker.config[tracker.todayDateString].length.should.equal(1);
+	});
+
+
+	it("should toggle state ON", function(){
+		time.setSeconds(time.getSeconds() + 30);
+		tk.travel(time); // Travel to that date.
+		tracker = new Tracker({keepConfig:true, testMode:true});
+		tracker.toggle();
+		tracker.config[tracker.todayDateString].length.should.equal(2);
+	});
+
+	it("should toggle state OFF", function(){
+		time.setSeconds(time.getSeconds() + 30);
+		tk.travel(time); // Travel to that date.
+		tracker = new Tracker({keepConfig:true, testMode:true});
+		tracker.toggle();
+		tracker.config[tracker.todayDateString].length.should.equal(2);
+	});
+
+	it("should validate current day", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true, validate:true});
+		var res = tracker.reportByDay();
+		res.should.equal(60);
+	});
+
+	it("should report current month as csv ", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true, csv:true});
+		var res = tracker.reportAsCsv();
+		res.should.equal(60);
 	});
 
 });

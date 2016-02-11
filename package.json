@@ -13,7 +13,8 @@
     "fs-extra": "^0.26.5",
     "moment": "^2.11.2",
     "open": "0.0.5",
-    "sanitize-filename": "^1.5.3"
+    "sanitize-filename": "^1.5.3",
+    "timekeeper": "0.0.5"
   },
   "devDependencies": {
     "jscoverage": "^0.6.0",
