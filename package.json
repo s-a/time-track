@@ -1,7 +1,7 @@
 {
   "name": "time-track",
   "version": "0.0.5",
-  "description": "A time-tracking commandline app",
+  "description": "A time-tracking commandline app.",
   "main": "lib/cli.js",
   "bin": {
     "tt": "lib/cli.js"
