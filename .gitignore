@@ -4,3 +4,4 @@ node_modules
 .configuration.json
 .test.configuration.json
 coverage.html
+lib/time-track
