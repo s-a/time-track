@@ -2,3 +2,5 @@ node_modules
 *.log
 *.csv
 .configuration.json
+.test.configuration.json
+coverage.html

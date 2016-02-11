@@ -14,10 +14,18 @@
     "open": "0.0.5",
     "sanitize-filename": "^1.5.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jscoverage": "^0.6.0",
+    "mocha": "^2.2.4",
+    "mocha-jshint": "^2.3.1",
+    "mocha-lcov-reporter": "1.0.0",
+    "should": "^8.2.2"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
+    "coverage": "node node_modules/jscoverage/bin/jscoverage lib lib-cov --exclude *.json,cli.js && rm lib-cov/.configuration.json && node node_modules/mocha/bin/_mocha -R html-cov > coverage.html && rm lib-cov/*.*",
     "debug": "iron-node lib/cli.js",
+    "debug-mocha": "iron-node node_modules/mocha/bin/_mocha",
     "bump": "npm version patch && git push && git push --tags && npm publish"
   },
   "repository": {

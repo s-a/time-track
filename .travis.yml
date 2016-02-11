@@ -1,0 +1,7 @@
+language: node_js
+node_js:
+  - "4"
+  - "5"
+after_success:
+  - node node_modules/jscoverage/bin/jscoverage lib lib-cov
+  - NODE_ENV=test mocha -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js
