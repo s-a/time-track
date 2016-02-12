@@ -196,6 +196,12 @@ describe("usage", function(){
 		tracker.toggle();
 		tracker.config[tracker.todayDateString].length.should.equal(2);
 	});
+});
+
+
+
+describe("usage", function(){
+	var tracker;
 
 	it("should validate current day", function(){
 		tracker = new Tracker({keepConfig:true, testMode:true, validate:true});
@@ -204,10 +210,14 @@ describe("usage", function(){
 	});
 
 	it("should report current month as csv ", function(){
-		tracker = new Tracker({keepConfig:true, testMode:true, csv:true});
-		var res = tracker.reportAsCsv();
+		tracker = new Tracker({keepConfig:true, testMode:true, report:true});
+		var res = tracker.report(true);
 		res.should.equal(60);
 	});
+});
+
+describe("OS GUI", function(){
+	var tracker;
 	
 	it("should openAppDataFolder", function(){
 		tracker = new Tracker({keepConfig:true, testMode:true, open:true});
