@@ -169,7 +169,7 @@ describe("usage", function(){
 	it("should toggle state ON", function(){
 		tracker = new Tracker({keepConfig:true, testMode:true});
 		tracker.toggle();
-		tracker.config[tracker.todayDateString].length.should.equal(1);
+		tracker.config[tracker.date.toString()].length.should.equal(1);
 	});
 
 	it("should toggle state OFF", function(){
@@ -177,7 +177,7 @@ describe("usage", function(){
 		tk.travel(time); // Travel to that date.
 		tracker = new Tracker({keepConfig:true, testMode:true});
 		tracker.toggle();
-		tracker.config[tracker.todayDateString].length.should.equal(1);
+		tracker.config[tracker.date.toString()].length.should.equal(1);
 	});
 
 
@@ -186,7 +186,7 @@ describe("usage", function(){
 		tk.travel(time); // Travel to that date.
 		tracker = new Tracker({keepConfig:true, testMode:true});
 		tracker.toggle();
-		tracker.config[tracker.todayDateString].length.should.equal(2);
+		tracker.config[tracker.date.toString()].length.should.equal(2);
 	});
 
 	it("should toggle state OFF", function(){
@@ -194,7 +194,7 @@ describe("usage", function(){
 		tk.travel(time); // Travel to that date.
 		tracker = new Tracker({keepConfig:true, testMode:true});
 		tracker.toggle();
-		tracker.config[tracker.todayDateString].length.should.equal(2);
+		tracker.config[tracker.date.toString()].length.should.equal(2);
 	});
 });
 

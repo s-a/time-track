@@ -38,7 +38,9 @@ A time-tracking commandline app.
 
 
 todo:  
- - change --switch to --checkout  
- - add --format (output format)
+ - add a 2nd shell command alias ```time-track```
  - write reporters (time range optional)
  - mark avialable project time as optional.
+ - new .option("-t, --timerange [from-to]", "(optional) reports tracked with tracked time by range range for the --report [DD.MM.YYYY[-DD.MM.YYYY]]")
+ - add --format (output format)
+ - add --info reports in a short human readable form (replaces --validate)
