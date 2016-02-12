@@ -208,5 +208,29 @@ describe("usage", function(){
 		var res = tracker.reportAsCsv();
 		res.should.equal(60);
 	});
+	
+	it("should openAppDataFolder", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true, open:true});
+		var res = tracker.openAppDataFolder();
+		res.should.equal(true);
+	});
+
+	it("should openSystemDataFolder", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true, opensystem:true});
+		var res = tracker.openSystemDataFolder();
+		res.should.equal(true);
+	});
+
+	it("should editAppDataJSON", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true, edit:true});
+		var res = tracker.editAppDataJSON();
+		res.should.equal(true);
+	});
+
+	it("should editSystemDataJSON", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true, editsystem:true});
+		var res = tracker.editSystemDataJSON();
+		res.should.equal(true);
+	});
 
 });
