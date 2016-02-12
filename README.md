@@ -1,7 +1,6 @@
-#timeTrack
+# ![time-track](logo/logo-sm.png) timeTrack
 A time-tracking commandline app.
 
-![time-track](logo/logo-sm.png)
 [![NPM Version](http://img.shields.io/npm/v/time-track.svg)](https://www.npmjs.org/package/time-track)
 [![Build Status](https://travis-ci.org/s-a/time-track.svg)](https://travis-ci.org/s-a/time-track)
 [![Coverage Status](https://coveralls.io/repos/github/s-a/time-track/badge.svg?branch=master)](https://coveralls.io/github/s-a/time-track?branch=master)
