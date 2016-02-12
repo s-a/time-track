@@ -36,6 +36,11 @@ require('mocha-jshint')(
 );
 
 describe("Time values", function(){
+	it("should return the correct time", function(){
+		var time = new TimeTrackTimeValue("00:00:09");
+		time.toString().should.equal("00:00:09");
+	});
+
 	it("should throw exception when an invalid time value was passed", function(){
 		(function() {
 			/* jshint ignore:start */
@@ -44,10 +49,6 @@ describe("Time values", function(){
 		}).should.throw("invalid time value");
 	});
 
-	it("should return the correct time", function(){
-		var time = new TimeTrackTimeValue("00:00:09");
-		time.toString().should.equal("00:00:09");
-	});
 });
 
 describe("Date values", function(){
@@ -246,8 +247,8 @@ describe("usage", function(){
 describe("usage", function(){
 	var tracker;
 
-	it("should validate current day", function(){
-		tracker = new Tracker({keepConfig:true, testMode:true, validate:true});
+	it("should inform about the current day", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true, info:true});
 		var res = tracker.reportByDay();
 		res.should.equal(60);
 	});
