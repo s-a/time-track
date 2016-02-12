@@ -134,6 +134,9 @@ describe("usage", function(){
 	it("should switch to project mocha-test", function(){
 		tracker = new Tracker({testMode:true, switch:"mocha-test-2"});
 		tracker.switchProject("mocha-test-2");
+		tracker = new Tracker({keepConfig:true, testMode:true});
+		tracker.toggle();
+		tracker.toggle();
 		tracker = new Tracker({keepConfig:true, testMode:true, switch:projectName});
 		tracker.switchProject(projectName);
 		tracker.system.configuration.activeProjectName.should.equal(projectName);
@@ -239,7 +242,7 @@ describe("usage", function(){
 	it("should list projects --list", function(){
 		tracker = new Tracker({keepConfig:true, testMode:true, list:true});
 		var list = tracker.listProjects();
-		list.length.should.above(0);
+		list.length.should.above(1);
 		list.indexOf(projectName).should.above(-1);
 	});
 

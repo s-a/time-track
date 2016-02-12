@@ -5,4 +5,4 @@ node_modules
 .test.configuration.json
 coverage.html
 lib/time-track/*
-/lib-cov/time-track/mocha-test
+/lib-cov/*
