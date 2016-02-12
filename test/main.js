@@ -4,12 +4,18 @@ var should = require("should");
 /* jshint ignore:end */
 var projectName = "mocha-test";
 var tk = require('timekeeper');
+var TimeTrackDateValue;
+var TimeTrackTimeValue;
 
 var Tracker;
 try {
 	Tracker = require("./../lib-cov/index.js");
+	TimeTrackDateValue = require("./../lib-cov/time-track-date-value.js");
+	TimeTrackTimeValue = require("./../lib-cov/time-track-time-value.js");
 } catch(e){
 	Tracker = require("./../lib/index.js");
+	TimeTrackDateValue = require("./../lib/time-track-date-value.js");
+	TimeTrackTimeValue = require("./../lib/time-track-time-value.js");
 }
 
 
@@ -28,6 +34,42 @@ require('mocha-jshint')(
 		]
 	}
 );
+
+describe("Time values", function(){
+	it("should throw exception when an invalid time value was passed", function(){
+		(function() {
+			/* jshint ignore:start */
+			var time = new TimeTrackTimeValue("adsfasdf");
+			/* jshint ignore:end */
+		}).should.throw("invalid time value");
+	});
+
+	it("should return the correct time", function(){
+		var time = new TimeTrackTimeValue("00:00:09");
+		time.toString().should.equal("00:00:09");
+	});
+});
+
+describe("Date values", function(){
+	it("should throw exception when an invalid date value was passed", function(){
+		(function() {
+			/* jshint ignore:start */
+			var time = new TimeTrackDateValue("adsfasdf");
+			/* jshint ignore:end */
+		}).should.throw("invalid date value");
+	});
+
+	it("should return the correct date", function(){
+		var date = new TimeTrackDateValue("01.09.1977");
+		date.toString().should.equal("01.09.1977");
+	});
+
+	it("should return the correct short date", function(){
+		var date = new TimeTrackDateValue("09.1977");
+		date.year.should.equal("1977");
+		date.month.should.equal("09");
+	});
+});
 
 describe("inital usage", function(){
 	var tracker;
@@ -89,7 +131,9 @@ describe("usage", function(){
 	var tracker;
 
 	it("should switch to project mocha-test", function(){
-		tracker = new Tracker({testMode:true, switch:projectName});
+		tracker = new Tracker({testMode:true, switch:"mocha-test-2"});
+		tracker.switchProject("mocha-test-2");
+		tracker = new Tracker({keepConfig:true, testMode:true, switch:projectName});
 		tracker.switchProject(projectName);
 		tracker.system.configuration.activeProjectName.should.equal(projectName);
 	});
@@ -97,28 +141,28 @@ describe("usage", function(){
 
 	it("should throw exception when no value was passed to --availableseconds", function(){
 		(function() {
-			tracker.program = {testMode:true, availableseconds:true};
+			tracker.program = {keepConfig:true, testMode:true, availableseconds:true};
 			tracker.setAvailableWorkTime();
 		}).should.throw("Please pass a value");
 	});
 
 	it("should throw exception when no value was passed to --availableminutes", function(){
 		(function() {
-			tracker.program = {testMode:true, availableminutes:true};
+			tracker.program = {keepConfig:true, testMode:true, availableminutes:true};
 			tracker.setAvailableWorkTime();
 		}).should.throw("Please pass a value");
 	});
 
 	it("should throw exception when no value was passed to --availablehours", function(){
 		(function() {
-			tracker.program = {testMode:true, availablehours:true};
+			tracker.program = {keepConfig:true, testMode:true, availablehours:true};
 			tracker.setAvailableWorkTime();
 		}).should.throw("Please pass a value");
 	});
 
 	it("should throw exception when no value was passed to --availabledays", function(){
 		(function() {
-			tracker.program = {testMode:true, availabledays:true};
+			tracker.program = {keepConfig:true, testMode:true, availabledays:true};
 			tracker.setAvailableWorkTime();
 		}).should.throw("Please pass a value");
 	});
@@ -126,7 +170,7 @@ describe("usage", function(){
 
 	it("should throw exception when an invalid value was passed to --availabledays", function(){
 		(function() {
-			tracker.program = {testMode:true, availabledays:"&/("};
+			tracker.program = {keepConfig:true, testMode:true, availabledays:"&/("};
 			tracker.setAvailableWorkTime();
 		}).should.throw("Please pass a value");
 	});
@@ -158,8 +202,7 @@ describe("usage", function(){
 	it("should list projects --list", function(){
 		tracker = new Tracker({keepConfig:true, testMode:true, list:true});
 		tracker.listProjects();
-		tracker.system.configuration.projects.length.should.equal(1);
-		tracker.system.configuration.projects[0].should.equal(projectName);
+		tracker.system.configuration.projects.length.should.equal(2);
 	});
 
 
