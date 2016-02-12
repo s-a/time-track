@@ -200,11 +200,6 @@ describe("usage", function(){
 		tracker.config.availableWorktimeInSeconsThisMonth.should.equal(1 * 60 * 60 * 8);
 	});
 
-	it("should list projects --list", function(){
-		tracker = new Tracker({keepConfig:true, testMode:true, list:true});
-		tracker.listProjects();
-		tracker.system.configuration.projects.length.should.equal(2);
-	});
 
 
 	var time = new Date(); 
@@ -240,6 +235,14 @@ describe("usage", function(){
 		tracker.toggle();
 		tracker.config[tracker.date.toString()].length.should.equal(2);
 	});
+
+	it("should list projects --list", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true, list:true});
+		var list = tracker.listProjects();
+		list.length.should.above(0);
+		list.indexOf(projectName).should.above(-1);
+	});
+
 });
 
 
