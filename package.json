@@ -4,7 +4,8 @@
   "description": "A time-tracking commandline app.",
   "main": "lib/cli.js",
   "bin": {
-    "tt": "lib/cli.js"
+    "tt": "lib/cli.js",
+    "time-track": "lib/cli.js"
   },
   "dependencies": {
     "colors": "^1.1.2",

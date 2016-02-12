@@ -14,33 +14,30 @@ A time-tracking commandline app.
 
 ```npm install time-track -g```
 
-```shell
-  Usage: tt [options]
+```
+ Usage: tt|time-track [options]
 
   Options:
 
     -h, --help                        output usage information
     -V, --version                     output the version number
-    -c, --csv [date]                  report as csv for the current month or for a given date MM.YYYY
-    -v, --validate [date]             check the tracked time today or by a given date DD.MM.YYYY
     -l, --list                        list available projects
     -s, --switch [project]            create or switch to a given project name
+    -i, --info [date]                 check the tracked time today or by a given date DD.MM.YYYY
     -S, --availableseconds [seconds]  set the available time for the current project in seconds
     -M, --availableminutes [minutes]  set the available time for the current project in minutes
     -H, --availablehours [hours]      set the available time for the current project in hours
     -D, --availabledays [days]        set the available time for the current project in days
     -o, --open                        open the app data folder
     -O, --opensystem                  open the system data folder
-    -e, --edit                        open current data storage json file in your editor
+    -e, --edit                        open current project data storage json file in your editor
     -E, --editsystem                  open system data storage json file in your editor
+    -r, --report [reporter]           reports tracked with a given reporter (reportername is optional and defaults to default-reporter.js)
 ```  
 
 
 
 todo:  
- - add a 2nd shell command alias ```time-track```
  - write reporters (time range optional)
- - mark avialable project time as optional.
  - new .option("-t, --timerange [from-to]", "(optional) reports tracked with tracked time by range range for the --report [DD.MM.YYYY[-DD.MM.YYYY]]")
  - add --format (output format)
- - add --info reports in a short human readable form (replaces --validate)
