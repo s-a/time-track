@@ -25,7 +25,7 @@
   },
   "scripts": {
     "test": "mocha",
-    "coverage": "node node_modules/jscoverage/bin/jscoverage lib lib-cov --exclude *.json,cli.js && rm lib-cov/.configuration.json && node node_modules/mocha/bin/_mocha -R html-cov > coverage.html && rm lib-cov/*.*",
+    "coverage": "node node_modules/jscoverage/bin/jscoverage lib lib-cov --exclude *.json,cli.js && node node_modules/mocha/bin/_mocha -R html-cov > coverage.html && rm lib-cov/*.*",
     "debug": "iron-node lib/cli.js",
     "debug-mocha": "iron-node node_modules/mocha/bin/_mocha",
     "bump": "npm version patch && git push && git push --tags && npm publish"
