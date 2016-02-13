@@ -1,4 +1,5 @@
 var path = require("path");
+var fs = require("fs");
 var fse = require("fs-extra");
 /* jshint ignore:start */
 // Code here will be ignored by JSHint.
@@ -49,7 +50,9 @@ describe("Clean machine", function(){
 		for (var i = 0; i < list.length; i++) {
 			var p = list[i];
 			var dir = path.join(f, p);
-			fse.removeSync(dir); //I just deleted my entire testing HOME directory.
+			if (fs.existsSync(dir)){
+				fse.removeSync(dir); //I just deleted my entire testing HOME directory.
+			}
 		}
 		tracker.listProjects().length.should.equal(0);
 	});
