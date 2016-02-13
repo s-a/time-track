@@ -1,5 +1,5 @@
-# ![time-track](logo/logo-sm.png) timeTrack
-A time-tracking commandline app.
+# ![time-track](logo/logo-sm.png) timeTrack - A time tracking commandline app
+Time is money, right? A few things that aims to help tracking your time. 
 
 [![NPM Version](http://img.shields.io/npm/v/time-track.svg)](https://www.npmjs.org/package/time-track)
 [![Build Status](https://travis-ci.org/s-a/time-track.svg)](https://travis-ci.org/s-a/time-track)
@@ -12,7 +12,11 @@ A time-tracking commandline app.
 [![Donate](http://s-a.github.io/donate/donate.svg)](http://s-a.github.io/donate/)
 
 
+
+## Installation
 ```npm install time-track -g```
+
+## Usage
 
 ```
  Usage: tt|time-track [options]
@@ -33,11 +37,11 @@ A time-tracking commandline app.
     -e, --edit                        open current project data storage json file in your editor
     -E, --editsystem                  open system data storage json file in your editor
     -r, --report [reporter]           reports tracked with a given reporter (reportername is optional and defaults to default-reporter.js)
-```  
+    -t, --timerange [MM.YYYY]         optional timerange for the reporter
+```
 
+### Available time of a project per month
+Internaly measured in seconds timeTrack need this information for a few reportings. You can set available time using the ```--available*``` parms. Keep in mind that this sets currently the available time of the current active project and the current month. If you want to change available time of another month then use --o to open the AppData folder and edit the ```.json``` files manualy.
 
-
-todo:  
- - write reporters (time range optional)
- - new .option("-t, --timerange [from-to]", "(optional) reports tracked with tracked time by range range for the --report [DD.MM.YYYY[-DD.MM.YYYY]]")
- - add --format (output format)
+### todo:
+ - add --format (output format) (currently the default report log csv data to console) ```tt -r > myreport.csv``` will write a csv file down to filesystem.

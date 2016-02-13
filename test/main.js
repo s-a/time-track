@@ -1,3 +1,5 @@
+var path = require("path");
+var fse = require("fs-extra");
 /* jshint ignore:start */
 // Code here will be ignored by JSHint.
 var should = require("should");
@@ -19,6 +21,8 @@ try {
 }
 
 
+
+
 /*
 if (process.env.TRAVIS && process.env.NODE_ENV === "test" && process.env.COVERAGE === "1" ){
 } else {
@@ -34,6 +38,23 @@ require('mocha-jshint')(
 		]
 	}
 );
+
+
+describe("Clean machine", function(){
+
+	it("should remove all testing app data folders", function(){
+		var tracker = new Tracker({testMode:true, switch:"test"});
+		var f = tracker.getAppDataRootFolder();
+		var list = tracker.listProjects();
+		for (var i = 0; i < list.length; i++) {
+			var p = list[i];
+			var dir = path.join(f, p);
+			fse.removeSync(dir); //I just deleted my entire testing HOME directory.
+		}
+		tracker.listProjects().length.should.equal(0);
+	});
+
+})
 
 describe("Time values", function(){
 	it("should return the correct time", function(){
@@ -130,6 +151,8 @@ describe("inital usage", function(){
 
 describe("usage", function(){
 	var tracker;
+	var time = new Date(); 
+	tk.freeze(time);
 
 	it("should switch to project mocha-test", function(){
 		tracker = new Tracker({testMode:true, switch:"mocha-test-2"});
@@ -142,6 +165,40 @@ describe("usage", function(){
 		tracker.system.configuration.activeProjectName.should.equal(projectName);
 	});
 
+	it("should work on current project", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true, info:true});
+		tracker.system.configuration.activeProjectName.should.equal(projectName);
+	});
+
+
+	it("should toggle state ON 1", function(){
+		time.setSeconds(time.getSeconds() + 30);
+		tk.travel(time); // Travel to that date.
+		tracker = new Tracker({keepConfig:true, testMode:true});
+		tracker.toggle();
+		tracker.config[tracker.date.toString()].length.should.equal(1);
+	});
+
+	it("should toggle state OFF 1", function(){
+		time.setSeconds(time.getSeconds() + 30);
+		tk.travel(time); // Travel to that date.
+		tracker = new Tracker({keepConfig:true, testMode:true});
+		tracker.toggle();
+		tracker.config[tracker.date.toString()].length.should.equal(1);
+	});
+
+	it("should return a negative for available seconds per day", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true});
+		tracker.getAvailableSecondsPerDay().should.below(0);
+	});
+
+	it("should throw exception when no available seconds per day was set up", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true});
+		(function() {
+			tracker.program = {keepConfig:true, testMode:true, availableseconds:true};
+			tracker.needAvailableWorkTimeSetup();
+		}).should.throw("There was no available worktime setup. Please set some time using --availableseconds, availableminutes or --availablehours");
+	});
 
 	it("should throw exception when no value was passed to --availableseconds", function(){
 		(function() {
@@ -205,25 +262,14 @@ describe("usage", function(){
 
 
 
-	var time = new Date(); 
-	tk.freeze(time);
 
-	it("should toggle state ON", function(){
+	it("should toggle state ON 2", function(){
 		tracker = new Tracker({keepConfig:true, testMode:true});
 		tracker.toggle();
-		tracker.config[tracker.date.toString()].length.should.equal(1);
+		tracker.config[tracker.date.toString()].length.should.equal(2);
 	});
 
-	it("should toggle state OFF", function(){
-		time.setSeconds(time.getSeconds() + 30);
-		tk.travel(time); // Travel to that date.
-		tracker = new Tracker({keepConfig:true, testMode:true});
-		tracker.toggle();
-		tracker.config[tracker.date.toString()].length.should.equal(1);
-	});
-
-
-	it("should toggle state ON", function(){
+	it("should toggle state OFF 2", function(){
 		time.setSeconds(time.getSeconds() + 30);
 		tk.travel(time); // Travel to that date.
 		tracker = new Tracker({keepConfig:true, testMode:true});
@@ -231,12 +277,21 @@ describe("usage", function(){
 		tracker.config[tracker.date.toString()].length.should.equal(2);
 	});
 
-	it("should toggle state OFF", function(){
+
+	it("should toggle state ON 3", function(){
 		time.setSeconds(time.getSeconds() + 30);
 		tk.travel(time); // Travel to that date.
 		tracker = new Tracker({keepConfig:true, testMode:true});
 		tracker.toggle();
-		tracker.config[tracker.date.toString()].length.should.equal(2);
+		tracker.config[tracker.date.toString()].length.should.equal(3);
+	});
+
+	it("should toggle state OFF 3", function(){
+		time.setSeconds(time.getSeconds() + 30);
+		tk.travel(time); // Travel to that date.
+		tracker = new Tracker({keepConfig:true, testMode:true});
+		tracker.toggle();
+		tracker.config[tracker.date.toString()].length.should.equal(3);
 	});
 
 	it("should list projects --list", function(){
@@ -251,19 +306,71 @@ describe("usage", function(){
 
 
 describe("usage", function(){
+	var time = new Date(); 
 	var tracker;
+
+	it("should work on current project", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true, info:true});
+		tracker.system.configuration.activeProjectName.should.equal(projectName);
+	});
+
 
 	it("should inform about the current day", function(){
 		tracker = new Tracker({keepConfig:true, testMode:true, info:true});
 		var res = tracker.reportByDay();
-		res.should.equal(60);
+		res.should.equal(90);
+	});
+
+	it("should inform about the day before", function(){
+	 	var d = new Date();
+ 		d.setDate(d.getDate()-1);
+		var date = new TimeTrackDateValue();
+		date.setByJavascriptDate(d);
+		tracker = new Tracker({keepConfig:true, testMode:true, info:date.toString()});
+		var res = tracker.reportByDay(date.toString());
+		res.should.equal(0);
+	});
+
+	it("should inform about a specified day", function(){
+	 	var d = new Date();
+ 		d.setDate(d.getDate()+1); // +1 because time is freezed
+		var date = new TimeTrackDateValue();
+		date.setByJavascriptDate(d);
+		tracker = new Tracker({keepConfig:true, testMode:true, info:date.toString()});
+		var res = tracker.reportByDay(date.toString());
+		res.should.equal(90);
 	});
 
 	it("should report current month as csv ", function(){
 		tracker = new Tracker({keepConfig:true, testMode:true, report:true});
 		var res = tracker.report(true);
-		res.should.equal(60);
+		res.should.equal(90);
 	});
+
+	it("should toggle state ON 4", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true});
+		tracker.toggle();
+		tracker.config[tracker.date.toString()].length.should.equal(4);
+	});
+
+	it("should toggle state OFF 4", function(){
+		time.setSeconds(time.getSeconds() + 60 * 60 * 10);
+		tk.travel(time); // Travel to that date.
+		tracker = new Tracker({keepConfig:true, testMode:true});
+		tracker.toggle();
+		tracker.config[tracker.date.toString()].length.should.equal(4);
+	});
+
+
+	it("should inform about a specified day when user is over the time", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true, availabledays:1});
+		tracker.setAvailableWorkTime();
+		tracker = new Tracker({keepConfig:true, testMode:true, info:true});
+		var res = tracker.reportByDay();
+		res.should.equal(36090);
+	});
+
+
 });
 
 describe("OS GUI", function(){
@@ -292,5 +399,23 @@ describe("OS GUI", function(){
 		var res = tracker.editSystemDataJSON();
 		res.should.equal(true);
 	});
-
 });
+
+
+describe("report", function(){
+	var tracker;
+	
+	it("should report a special day", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true, report:true, timerange:"09.1977"});
+		var res = tracker.report(true);
+		res.should.equal(0);
+	});
+
+	it("should report today ", function(){
+		var d = new TimeTrackDateValue();
+		tracker = new Tracker({keepConfig:true, testMode:true, report:true, timerange:d.toString()});
+		var res = tracker.report(true);
+		res.should.equal(36090);
+	});
+});
+
