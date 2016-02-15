@@ -13,8 +13,12 @@ Time is money, right? A few things that aims to help tracking your time.
 
 
 
+
 ## Installation
 ```npm install time-track -g```
+
+## Demo
+![Demo](/demo.gif)
 
 ## Usage
 
@@ -40,8 +44,9 @@ Time is money, right? A few things that aims to help tracking your time.
     -t, --timerange [MM.YYYY]         optional timerange for the reporter
 ```
 
-### Available time of a project per month
-Internaly measured in seconds timeTrack need this information for a few reportings. You can set available time using the ```--available*``` parms. Keep in mind that this sets currently the available time of the current active project and the current month. If you want to change available time of another month then use --o to open the AppData folder and edit the ```.json``` files manualy.
+## Write your own reporter
+Currently the default reporter log csv data to console. ```tt -r > myreport.csv``` will write a csv file down to filesystem.  
+Check out the [default reporter](/lib/default-reporter.js) and create your own. Then use it with ```tt -r my-custom-reporter.js```.
 
-### todo:
- - add --format (output format) (currently the default report log csv data to console) ```tt -r > myreport.csv``` will write a csv file down to filesystem.
+## Available time of a project per month
+Internaly measured in seconds a few reportings in timeTrack may need this information. You can set available time using the ```--available*``` parms. ***Keep in mind that this sets currently the available time of the current active project and the current month.*** If you want to change available time of another month then use --o to open the AppData folder and edit the ```.json``` files manualy.
