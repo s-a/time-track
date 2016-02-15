@@ -14,6 +14,7 @@
     "fs-extra": "^0.26.5",
     "moment": "^2.11.2",
     "open": "0.0.5",
+    "pretty-error": "^2.0.0",
     "sanitize-filename": "^1.5.3",
     "timekeeper": "0.0.5"
   },
