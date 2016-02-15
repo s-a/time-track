@@ -154,8 +154,10 @@ describe("inital usage", function(){
 
 describe("usage", function(){
 	var tracker;
-	var time = new Date(); 
-	tk.freeze(time);
+	var beginingDate = new Date(1977, 8, 1, 8, 0, 0, 0);
+	tk.travel(beginingDate);
+	tk.freeze(beginingDate);
+	var time = beginingDate;
 
 	it("should switch to project mocha-test", function(){
 		tracker = new Tracker({testMode:true, switch:"mocha-test-2"});
@@ -411,10 +413,10 @@ describe("report", function(){
 	it("should report a special day", function(){
 		tracker = new Tracker({keepConfig:true, testMode:true, report:true, timerange:"09.1977"});
 		var res = tracker.report(true);
-		res.should.equal(0);
+		res.should.equal(36090);
 	});
 
-	it("should report today ", function(){
+	it("should report today", function(){
 		var d = new TimeTrackDateValue();
 		tracker = new Tracker({keepConfig:true, testMode:true, report:true, timerange:d.toString()});
 		var res = tracker.report(true);
