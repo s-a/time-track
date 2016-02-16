@@ -1,6 +1,6 @@
 {
   "name": "time-track",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Time is money, right? A few things that aims to help tracking your time. So here is a time tracking commandline app.",
   "main": "lib/cli.js",
   "bin": {
