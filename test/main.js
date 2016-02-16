@@ -22,7 +22,25 @@ try {
 }
 
 
+var getLineEndingsStyle = function(fn){
+	var result = "unknown";
+	var styles = {
+		'unix': /[^\r]\n/,
+		'osx': /\r/,
+		'windows': /\r\n/
+	};
 
+	var text = fs.readFileSync(fn);
+	for (var os in styles) {
+		if (styles.hasOwnProperty(os)){
+			var regex = styles[os];
+			if(regex.test(text)){
+				result = os;
+			}
+		}
+	}
+	return result;
+}
 
 /*
 if (process.env.TRAVIS && process.env.NODE_ENV === "test" && process.env.COVERAGE === "1" ){
@@ -40,6 +58,27 @@ require('mocha-jshint')(
 	}
 );
 
+
+describe('unix-style', function(){
+	it('cli.js', function(){
+		getLineEndingsStyle(path.join(__dirname, "..", "lib", "cli.js")).should.equal("unix");
+	});
+	it('index.js', function(){
+		getLineEndingsStyle(path.join(__dirname, "..", "lib", "index.js")).should.equal("unix");
+	});
+	it('default-reporter.js', function(){
+		getLineEndingsStyle(path.join(__dirname, "..", "lib", "default-reporter.js")).should.equal("unix");
+	});
+	it('time-track-time-value.js', function(){
+		getLineEndingsStyle(path.join(__dirname, "..", "lib", "time-track-time-value.js")).should.equal("unix");
+	});
+	it('time-track-date-value.js', function(){
+		getLineEndingsStyle(path.join(__dirname, "..", "lib", "time-track-date-value.js")).should.equal("unix");
+	});
+	it('quotes.js', function(){
+		getLineEndingsStyle(path.join(__dirname, "..", "lib", "quotes.js")).should.equal("unix");
+	});
+});
 
 describe("Clean machine", function(){
 
