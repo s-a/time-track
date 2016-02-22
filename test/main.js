@@ -481,7 +481,18 @@ describe("usage", function(){
 		var date = tracker.date.toString();
 		(function() {
 			tracker.ensureTrackedDayWasStopped(date);
+			tracker.toggle();
 		}).should.not.throw("There was no tracking end time found for " + date);
+	});
+
+	it("should throw 'no tracking end time found'", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true});
+		
+		var beginingDate = new Date(1977, 9, 1, 8, 0, 0, 0);
+		tk.travel(beginingDate);
+		(function() {
+			tracker.ensurePreviousTimeTrackWasStopped("01.10.1977");
+		}).should.throw("There was no tracking end time found for " + "01.09.1977");
 	});
 
 });
