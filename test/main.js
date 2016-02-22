@@ -463,3 +463,26 @@ describe("report", function(){
 	});
 });
 
+describe("usage", function(){
+	var tracker;
+	
+	it("should throw 'no tracking end time found'", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true});
+		tracker.toggle();
+		var date = tracker.date.toString();
+		(function() {
+			tracker.ensureTrackedDayWasStopped(date);
+		}).should.throw("There was no tracking end time found for " + date);
+	});
+
+	it("should not throw 'no tracking end time found'", function(){
+		tracker = new Tracker({keepConfig:true, testMode:true});
+		tracker.toggle();
+		var date = tracker.date.toString();
+		(function() {
+			tracker.ensureTrackedDayWasStopped(date);
+		}).should.not.throw("There was no tracking end time found for " + date);
+	});
+
+});
+
